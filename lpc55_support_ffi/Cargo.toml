@@ -1,0 +1,13 @@
+[package]
+name = "lpc55_support_ffi"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "lpc55_support"
+crate-type = ["cdylib"]
+
+[dependencies]
+lpc55_sign = { path = "../lpc55_sign" }
+lpc55_areas = { path = "../lpc55_areas" }
+toml = { workspace = true, features = ["parse"] }

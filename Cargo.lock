@@ -533,6 +533,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "lpc55_support_ffi"
+version = "0.1.0"
+dependencies = [
+ "lpc55_areas",
+ "lpc55_sign",
+ "toml",
+]
+
+[[package]]
 name = "mach"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
