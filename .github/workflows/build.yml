@@ -100,6 +100,9 @@ jobs:
         run: |
           set -euo pipefail
           cargo build --release --bins
+          if [[ "${{ matrix.archive_os }}" == "ubuntu" ]]; then
+            cargo build --release -p lpc55_support_ffi
+          fi
       - name: Package binaries
         id: package
         if: github.event_name == 'push'
@@ -115,6 +118,10 @@ jobs:
           cp "target/release/lpc55_sign${exe_suffix}" "${staging}/bin/"
           cp "target/release/lpc55_flash${exe_suffix}" "${staging}/bin/"
           cp "target/release/cfpa-update${exe_suffix}" "${staging}/bin/"
+          if [[ "${archive_os}" == "ubuntu" ]]; then
+            mkdir -p "${staging}/lib"
+            cp target/release/liblpc55_support.so "${staging}/lib/"
+          fi
           cp README.md "${staging}/"
           tar -czf "${archive}.tar.gz" -C dist "${archive}"
           echo "archive_name=${archive}.tar.gz" >> "$GITHUB_OUTPUT"
